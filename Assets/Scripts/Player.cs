@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     private float wallJumpCooldown;
 
+    private Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,8 @@ public class Player : MonoBehaviour
         isJumping = false;
 
         wallJumpCooldown = 0.0f;
+
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -80,6 +84,8 @@ public class Player : MonoBehaviour
         }
 
         wallJumpCooldown += Time.deltaTime;
+
+        UpdateAnimations(); 
     }
 
     void FixedUpdate()
@@ -142,5 +148,19 @@ public class Player : MonoBehaviour
         {
             canWallJump = false;
         }
+    }
+
+    void UpdateAnimations()
+    {
+        if (currentDirection == Direction.None)
+        {
+            anim.SetBool("IsRunning", false);
+        }
+        else
+        {
+            anim.SetBool("IsRunning", true);
+        }
+
+        anim.SetBool("IsJumping", isJumping);
     }
 }
