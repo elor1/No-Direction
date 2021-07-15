@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class Player : MonoBehaviour
 
     private float wallJumpCooldown;
 
+    private Animator anim;
+
+    [SerializeField] private ControlImages WImage,AImage, SImage, DImage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +42,8 @@ public class Player : MonoBehaviour
         isJumping = false;
 
         wallJumpCooldown = 0.0f;
+
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -46,21 +53,25 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D) && canMoveRight)
         {
             canMoveRight = false;
+            DImage.Disable();
             FlipRight();
         }
         else if (Input.GetKey(KeyCode.A) && canMoveLeft)
         {
             canMoveLeft = false;
+            AImage.Disable();
             FlipLeft();
         }
         else if (Input.GetKey(KeyCode.S) && canStop)
         {
             canStop = false;
+            SImage.Disable();
             currentDirection = Direction.None;
         }
         else if (Input.GetKey(KeyCode.W) && canJump)
         {
             canJump = false;
+            WImage.Disable();
             isJumping = true;
         }
 
@@ -80,6 +91,8 @@ public class Player : MonoBehaviour
         }
 
         wallJumpCooldown += Time.deltaTime;
+
+        UpdateAnimations(); 
     }
 
     void FixedUpdate()
@@ -142,5 +155,19 @@ public class Player : MonoBehaviour
         {
             canWallJump = false;
         }
+    }
+
+    void UpdateAnimations()
+    {
+        if (currentDirection == Direction.None)
+        {
+            anim.SetBool("IsRunning", false);
+        }
+        else
+        {
+            anim.SetBool("IsRunning", true);
+        }
+
+        anim.SetBool("IsJumping", isJumping);
     }
 }
