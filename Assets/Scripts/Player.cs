@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class Player : MonoBehaviour
     private float wallJumpCooldown;
 
     private Animator anim;
+
+    [SerializeField] private ControlImages WImage,AImage, SImage, DImage;
 
     // Start is called before the first frame update
     void Start()
@@ -50,21 +53,25 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D) && canMoveRight)
         {
             canMoveRight = false;
+            DImage.Disable();
             FlipRight();
         }
         else if (Input.GetKey(KeyCode.A) && canMoveLeft)
         {
             canMoveLeft = false;
+            AImage.Disable();
             FlipLeft();
         }
         else if (Input.GetKey(KeyCode.S) && canStop)
         {
             canStop = false;
+            SImage.Disable();
             currentDirection = Direction.None;
         }
         else if (Input.GetKey(KeyCode.W) && canJump)
         {
             canJump = false;
+            WImage.Disable();
             isJumping = true;
         }
 
