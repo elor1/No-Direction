@@ -203,6 +203,13 @@ public class Player : MonoBehaviour
             audioSource.Play();
             StopMovement();
             helpText.text = "R to restart";
+            Jump();
+
+            //Add rotation
+            rb.constraints = RigidbodyConstraints2D.None;
+            rb.AddTorque(100.0f);
+            Collider2D boxCollider = GetComponent<Collider2D>();
+            boxCollider.enabled = false;
         }
     }
 
