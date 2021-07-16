@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour
     private Animator anim;
 
     [SerializeField] private ControlImages WImage,AImage, SImage, DImage;
+
+    [SerializeField] private TextMeshProUGUI helpText;
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +72,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Update input
+        if (Input.GetKey(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
         if (Input.GetKey(KeyCode.D) && canMoveRight)
         {
             canMoveRight = false;
@@ -180,7 +188,8 @@ public class Player : MonoBehaviour
     {
         if (other.tag == "Spikes")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            StopMovement();
+            helpText.text = "R to restart";
         }
     }
 
@@ -201,5 +210,9 @@ public class Player : MonoBehaviour
     public void StopMovement()
     {
         currentDirection = Direction.None;
+        canMoveRight = false;
+        canMoveLeft = false;
+        canStop = false;
+        canJump = false;
     }
 }

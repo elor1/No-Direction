@@ -99,11 +99,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 50
-  jumpHeight: 650
+  jumpHeight: 750
+  canJump: 0
+  canMoveRight: 0
+  canMoveLeft: 0
+  canStop: 0
   WImage: {fileID: 0}
   AImage: {fileID: 0}
   SImage: {fileID: 0}
   DImage: {fileID: 0}
+  helpText: {fileID: 0}
 --- !u!61 &5685157235116755311
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -117,7 +122,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.09295416, y: -0.31173277}
+  m_Offset: {x: 0.0362854, y: -0.31173277}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,7 +133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1292043, y: 1.3765345}
+  m_Size: {x: 0.81251526, y: 1.3765345}
   m_EdgeRadius: 0
 --- !u!50 &8662722407917377969
 Rigidbody2D:
