@@ -32,6 +32,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI helpText;
 
+    [SerializeField] private AudioClip[] sfx;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +69,9 @@ public class Player : MonoBehaviour
         {
             SImage.Disable();
         }
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = sfx[0];
     }
 
     // Update is called once per frame
@@ -79,24 +85,28 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D) && canMoveRight)
         {
+            audioSource.Play();
             canMoveRight = false;
             DImage.Disable();
             FlipRight();
         }
         else if (Input.GetKey(KeyCode.A) && canMoveLeft)
         {
+            audioSource.Play();
             canMoveLeft = false;
             AImage.Disable();
             FlipLeft();
         }
         else if (Input.GetKey(KeyCode.S) && canStop)
         {
+            audioSource.Play();
             canStop = false;
             SImage.Disable();
             currentDirection = Direction.None;
         }
         else if (Input.GetKey(KeyCode.W) && canJump)
         {
+            audioSource.Play();
             canJump = false;
             WImage.Disable();
             isJumping = true;
@@ -104,6 +114,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && canWallJump && wallJumpCooldown >= 0.3f)
         {
+            audioSource.Play();
             isJumping = true;
             if (currentDirection == Direction.Right)
             {
@@ -188,6 +199,8 @@ public class Player : MonoBehaviour
     {
         if (other.tag == "Spikes")
         {
+            audioSource.clip = sfx[1];
+            audioSource.Play();
             StopMovement();
             helpText.text = "R to restart";
         }

@@ -5765,7 +5765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9213105088423735817, guid: faa67edd70b729448ad7d4e24cff2cba, type: 3}
       propertyPath: canStop
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9213105088423735817, guid: faa67edd70b729448ad7d4e24cff2cba, type: 3}
       propertyPath: restartText
