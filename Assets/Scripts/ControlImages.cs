@@ -11,7 +11,7 @@ public class ControlImages : MonoBehaviour
     private Image image;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         image = GetComponent<Image>();
         image.sprite = enabledImage;

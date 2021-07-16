@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
@@ -22,7 +23,18 @@ public class Goal : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            Player player = other.GetComponent<Player>();
+            player.StopMovement();
             anim.SetBool("IsCollected", true);
+        }
+    }
+
+    void NextLevel()
+    {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (SceneManager.sceneCountInBuildSettings > nextSceneIndex)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
         }
     }
 }

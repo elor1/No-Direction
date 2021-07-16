@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float movementSpeed = 50.0f;
     [SerializeField] private float jumpHeight = 550.0f;
 
-    private bool canJump, canMoveRight, canMoveLeft, canStop, canWallJump, isJumping;
+    [SerializeField] bool canJump, canMoveRight, canMoveLeft, canStop;
+    private bool canWallJump, isJumping;
 
     Vector3 velocity = Vector3.zero;
 
@@ -33,10 +35,10 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentDirection = Direction.None;
 
-        canJump = true;
-        canMoveRight = true;
-        canMoveLeft = true;
-        canStop = true;
+        //canJump = true;
+        //canMoveRight = true;
+        //canMoveLeft = true;
+        //canStop = true;
 
         canWallJump = false;
         isJumping = false;
@@ -44,6 +46,23 @@ public class Player : MonoBehaviour
         wallJumpCooldown = 0.0f;
 
         anim = GetComponent<Animator>();
+
+        if (!canJump)
+        {
+            WImage.Disable();
+        }
+        if (!canMoveLeft)
+        {
+            AImage.Disable();
+        }
+        if (!canMoveRight)
+        {
+            DImage.Disable();
+        }
+        if (!canStop)
+        {
+            SImage.Disable();
+        }
     }
 
     // Update is called once per frame
@@ -157,6 +176,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Spikes")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
     void UpdateAnimations()
     {
         if (currentDirection == Direction.None)
@@ -169,5 +196,10 @@ public class Player : MonoBehaviour
         }
 
         anim.SetBool("IsJumping", isJumping);
+    }
+
+    public void StopMovement()
+    {
+        currentDirection = Direction.None;
     }
 }
