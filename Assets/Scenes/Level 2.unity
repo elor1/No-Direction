@@ -590,7 +590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9213105088423735817, guid: faa67edd70b729448ad7d4e24cff2cba, type: 3}
       propertyPath: canMoveLeft
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9213105088423735817, guid: faa67edd70b729448ad7d4e24cff2cba, type: 3}
       propertyPath: helpText
@@ -1020,7 +1020,7 @@ GameObject:
   - component: {fileID: 861788533}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4625,7 +4625,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Watch out for spikes!
+  m_text: 'W to jump
+
+
+    Watch out for spikes!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 891ddcfd2df35924694bfdb1d5f79285, type: 2}
   m_sharedMaterial: {fileID: 6058353773217423827, guid: 891ddcfd2df35924694bfdb1d5f79285, type: 2}

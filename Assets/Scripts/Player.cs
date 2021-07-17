@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpHeight = 550.0f;
 
     [SerializeField] bool canJump, canMoveRight, canMoveLeft, canStop;
-    private bool canWallJump, isJumping;
+    private bool canWallJump, isJumping, isGrounded;
 
     Vector3 velocity = Vector3.zero;
 
@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
 
         canWallJump = false;
         isJumping = false;
+        isGrounded = true;
 
         wallJumpCooldown = 0.0f;
 
@@ -104,7 +105,7 @@ public class Player : MonoBehaviour
             SImage.Disable();
             currentDirection = Direction.None;
         }
-        else if (Input.GetKey(KeyCode.W) && canJump)
+        else if (Input.GetKey(KeyCode.W) && canJump && isGrounded)
         {
             audioSource.Play();
             canJump = false;
@@ -185,6 +186,11 @@ public class Player : MonoBehaviour
         {
             canWallJump = true;
         }
+
+        if (other.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+        }
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -192,6 +198,11 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Wall")
         {
             canWallJump = false;
+        }
+
+        if (other.gameObject.tag == "Ground")
+        {
+            isGrounded = false;
         }
     }
 
@@ -208,8 +219,8 @@ public class Player : MonoBehaviour
             //Add rotation
             rb.constraints = RigidbodyConstraints2D.None;
             rb.AddTorque(100.0f);
-            Collider2D boxCollider = GetComponent<Collider2D>();
-            boxCollider.enabled = false;
+            CapsuleCollider2D capsuleCollider = GetComponent<CapsuleCollider2D>();
+            capsuleCollider.enabled = false;
         }
     }
 

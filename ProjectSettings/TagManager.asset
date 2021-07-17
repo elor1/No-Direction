@@ -8,6 +8,7 @@ TagManager:
   - Goal
   - Spikes
   - Music
+  - Ground
   layers:
   - Default
   - TransparentFX
