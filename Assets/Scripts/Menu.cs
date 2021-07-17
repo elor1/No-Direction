@@ -13,4 +13,11 @@ public class Menu : MonoBehaviour
             SceneManager.LoadScene(nextSceneIndex);
         }
     }
+
+    public void GoToMenu()
+    {
+        GameObject backgroundMusic = GameObject.FindGameObjectWithTag("Music");
+        Destroy(backgroundMusic);
+        SceneManager.LoadScene(0);
+    }
 }
