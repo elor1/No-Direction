@@ -9,6 +9,7 @@ TagManager:
   - Spikes
   - Music
   - Ground
+  - Intro
   layers:
   - Default
   - TransparentFX

@@ -37,6 +37,7 @@ public class Goal : MonoBehaviour
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
         if (SceneManager.sceneCountInBuildSettings > nextSceneIndex)
         {
+            GameManager.currentState = GameManager.GameState.Intro;
             SceneManager.LoadScene(nextSceneIndex);
         }
     }
