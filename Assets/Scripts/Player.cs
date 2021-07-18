@@ -78,60 +78,65 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Update input
-        if (Input.GetKey(KeyCode.R))
+        if (GameManager.currentState == GameManager.GameState.Playing)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-
-        if (Input.GetKey(KeyCode.D) && canMoveRight)
-        {
-            audioSource.Play();
-            canMoveRight = false;
-            DImage.Disable();
-            FlipRight();
-        }
-        else if (Input.GetKey(KeyCode.A) && canMoveLeft)
-        {
-            audioSource.Play();
-            canMoveLeft = false;
-            AImage.Disable();
-            FlipLeft();
-        }
-        else if (Input.GetKey(KeyCode.S) && canStop)
-        {
-            audioSource.Play();
-            canStop = false;
-            SImage.Disable();
-            currentDirection = Direction.None;
-        }
-        else if (Input.GetKey(KeyCode.W) && canJump && isGrounded)
-        {
-            audioSource.Play();
-            canJump = false;
-            WImage.Disable();
-            isJumping = true;
-        }
-
-        if (Input.GetKey(KeyCode.Space) && canWallJump && wallJumpCooldown >= 0.3f)
-        {
-            audioSource.Play();
-            isJumping = true;
-            if (currentDirection == Direction.Right)
+            //Update input
+            if (Input.GetKey(KeyCode.R))
             {
-                FlipLeft();
+                GameManager.currentState = GameManager.GameState.Intro;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
-            else if (currentDirection == Direction.Left)
+
+
+            if (Input.GetKey(KeyCode.D) && canMoveRight)
             {
+                audioSource.Play();
+                canMoveRight = false;
+                DImage.Disable();
                 FlipRight();
             }
+            else if (Input.GetKey(KeyCode.A) && canMoveLeft)
+            {
+                audioSource.Play();
+                canMoveLeft = false;
+                AImage.Disable();
+                FlipLeft();
+            }
+            else if (Input.GetKey(KeyCode.S) && canStop)
+            {
+                audioSource.Play();
+                canStop = false;
+                SImage.Disable();
+                currentDirection = Direction.None;
+            }
+            else if (Input.GetKey(KeyCode.W) && canJump && isGrounded)
+            {
+                audioSource.Play();
+                canJump = false;
+                WImage.Disable();
+                isJumping = true;
+            }
 
-            wallJumpCooldown = 0.0f;
+            if (Input.GetKey(KeyCode.Space) && canWallJump && wallJumpCooldown >= 0.3f)
+            {
+                audioSource.Play();
+                isJumping = true;
+                if (currentDirection == Direction.Right)
+                {
+                    FlipLeft();
+                }
+                else if (currentDirection == Direction.Left)
+                {
+                    FlipRight();
+                }
+
+                wallJumpCooldown = 0.0f;
+            }
+
+            wallJumpCooldown += Time.deltaTime;
+
+            UpdateAnimations();
         }
-
-        wallJumpCooldown += Time.deltaTime;
-
-        UpdateAnimations(); 
     }
 
     void FixedUpdate()
