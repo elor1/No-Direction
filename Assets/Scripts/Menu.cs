@@ -20,4 +20,9 @@ public class Menu : MonoBehaviour
         Destroy(backgroundMusic);
         SceneManager.LoadScene(0);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
